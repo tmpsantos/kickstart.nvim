@@ -735,9 +735,11 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
-    -- clangd = {},
+    clangd = {
+      cmd = { 'clangd', '--header-insertion=never' },
+    },
     -- gopls = {},
-    -- pyright = {},
+    ty = {},
     -- tsc = {},
     --
     -- Some languages (like rust) have entire language plugins that can be useful:
@@ -778,6 +780,11 @@ do
           format = { enable = false }, -- Disable formatting (formatting is done by stylua)
         },
       },
+    },
+
+    -- LSP for the Robot Framework
+    robotcode = {
+      cmd = { 'uv', 'run', 'robotcode', 'language-server' },
     },
   }
 
@@ -950,7 +957,7 @@ do
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
   -- Ensure basic parsers are installed
-  local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+  local parsers = { 'bash', 'c', 'diff', 'html', 'javascript', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'python', 'query', 'robot', 'vim', 'vimdoc' }
   require('nvim-treesitter').install(parsers)
 
   ---@param buf integer
