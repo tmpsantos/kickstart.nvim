@@ -429,6 +429,8 @@ do
     styles = {
       comments = { italic = false }, -- Disable italics in comments
     },
+
+    on_colors = function(colors) colors.bg = '#000000' end,
   }
 
   -- Load the colorscheme here.
